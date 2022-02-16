@@ -22,6 +22,14 @@ class PhotosCollectionViewController: UICollectionViewController {
         title = "Photos"
         setupCollectionCells()
         setupSearchBar()
+        
+        // StartPage
+        self.networkDataFetcher.fetchImages(searchTerm: "Hello") { [weak self] (searchResults) in
+            guard let fetchedPhotos = searchResults else { return }
+            self?.photos = fetchedPhotos.results
+            self?.collectionView.reloadData()
+        }
+        
     }
    
     // MARK: - Setup UI elements

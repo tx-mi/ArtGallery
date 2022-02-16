@@ -15,10 +15,10 @@ struct SearchResults: Decodable {
 struct UnsplashPhoto: Decodable {
     let width: Int
     let height: Int
-    let urls: [URLKing.RawValue:String]
+    let urls: [URLKind.RawValue:String]
     
     
-    enum URLKing: String {
+    enum URLKind: String {
         case raw
         case full
         case regular
