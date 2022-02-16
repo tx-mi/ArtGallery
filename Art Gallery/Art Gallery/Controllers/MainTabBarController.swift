@@ -11,6 +11,7 @@ class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.tabBar.backgroundColor = .black
         
         let photosVC = PhotosCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
         viewControllers = [
@@ -23,7 +24,7 @@ class MainTabBarController: UITabBarController {
         let navigationVC = UINavigationController(rootViewController: rootViewController)
         navigationVC.tabBarItem.title = title
         navigationVC.tabBarItem.image = image
-        navigationVC.navigationItem.searchController = UISearchController()
+        navigationVC.navigationBar.backgroundColor = .black
         return navigationVC
     }
 }

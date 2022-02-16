@@ -12,14 +12,6 @@ class PhotoCollectionCell: UICollectionViewCell {
     
     static let reuseId = "PhotoCell"
     
-    private let checkmark: UIImageView = {
-        let image = UIImage(systemName: "checkmark")
-        let imageView = UIImageView(image: image)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.alpha = 0
-        return imageView
-    }()
-    
     let photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
@@ -36,18 +28,10 @@ class PhotoCollectionCell: UICollectionViewCell {
         }
     }
     
-     override var isSelected: Bool {
-        didSet {
-            updateSelectedState()
-        }
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        updateSelectedState()
         setupPhotoImageView()
-        setupCheckmarkView()
     }
     
     override func prepareForReuse() {
@@ -55,30 +39,18 @@ class PhotoCollectionCell: UICollectionViewCell {
         photoImageView.image = nil // Delete old photo before reuse
     }
     
-    private func updateSelectedState() {
-        photoImageView.alpha = isSelected ? 0.7 : 1
-        checkmark.alpha = isSelected ? 1 : 0
-    }
-    
     // MARK: - SetupViews
     
     private func setupPhotoImageView() {
         self.addSubview(photoImageView)
+        self.layer.cornerRadius = 5.0
+        self.layer.masksToBounds = true
         
         NSLayoutConstraint.activate([
             photoImageView.topAnchor.constraint(equalTo: self.topAnchor),
             photoImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             photoImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             photoImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
-        ])
-    }
-    
-    private func setupCheckmarkView() {
-        self.addSubview(checkmark)
-        
-        NSLayoutConstraint.activate([
-            checkmark.bottomAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: -8),
-            checkmark.trailingAnchor.constraint(equalTo: photoImageView.trailingAnchor, constant: -8)
         ])
     }
     
