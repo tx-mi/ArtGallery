@@ -29,7 +29,7 @@ class NetworkService {
         var params = [String: String]()
         params["query"] = searchTerm
         params["page"] = String(1)
-        params["per_page"] = String(30)
+        params["per_page"] = String(50)
         return params
     }
     

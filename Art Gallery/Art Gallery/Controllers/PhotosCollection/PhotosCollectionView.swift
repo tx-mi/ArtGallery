@@ -49,7 +49,7 @@ class PhotosCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionCell.reuseId, for: indexPath) as! PhotoCollectionCell
         cell.backgroundColor = .lightGray
-//        cell.unsplashPhoto = photos[indexPath.item]
+        cell.unsplashPhoto = photos[indexPath.item]
         return cell
     }
     
