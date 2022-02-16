@@ -27,6 +27,7 @@ class PhotosCollectionViewController: UICollectionViewController {
     
     private func setupCollectionCells() {
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CellID")
+        collectionView.register(PhotoCollectionCell.self, forCellWithReuseIdentifier: PhotoCollectionCell.reuseId)
     }
     
     private func setupSearchBar() {
@@ -45,8 +46,9 @@ class PhotosCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellID", for: indexPath)
-        cell.backgroundColor = .systemPink
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionCell.reuseId, for: indexPath) as! PhotoCollectionCell
+        cell.backgroundColor = .lightGray
+//        cell.unsplashPhoto = photos[indexPath.item]
         return cell
     }
     
