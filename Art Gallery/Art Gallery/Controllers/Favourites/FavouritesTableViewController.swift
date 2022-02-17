@@ -14,6 +14,7 @@ class FavouritesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Favourites"
         
         setupTableView()
     }
