@@ -91,8 +91,9 @@ class DetailViewController: UIViewController {
             let deleteAction = UIAlertAction(title: "Remove", style: .default) { (_) in
                 let countPhotos = self.likesVC.photos.count
                 if countPhotos == 0 { return }
-                self.likesVC.photos.remove(at: 0)
+                self.likesVC.photos.remove(at: self.hasInLikes().1)
                 self.updateHeartButtonState()
+                self.likesVC.tableView.reloadData()
             }
             
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -114,17 +115,17 @@ class DetailViewController: UIViewController {
 // MARK: - Search in favourites
 extension DetailViewController {
     
-    func hasInLikes() -> Bool {
-        for picture in likesVC.photos {
+    func hasInLikes() -> (Bool, Int) {
+        for (index, picture) in likesVC.photos.enumerated() {
             if picture.id == unsplashPhoto.id {
-                return true
+                return (true, index)
             }
         }
-        return false
+        return (false, -1)
     }
     
     func updateHeartButtonState() {
-        if !hasInLikes() {
+        if !hasInLikes().0 {
             aboutView.heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
         } else {
             aboutView.heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
