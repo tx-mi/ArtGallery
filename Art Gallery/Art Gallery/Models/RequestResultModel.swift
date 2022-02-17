@@ -7,16 +7,13 @@
 
 import Foundation
 
-struct SearchResults: Decodable {
-    let total: Int
-    let results: [UnsplashPhoto]
-}
-
 struct UnsplashPhoto: Decodable {
     let id: String
+    let created_at: String
     let width: Int
     let height: Int
-    let likes: Int
+    let downloads: Int
+    let location: Location?
     let user: User
     let urls: [URLKind.RawValue:String]
     
@@ -28,6 +25,10 @@ struct UnsplashPhoto: Decodable {
         case small
         case thumb
     }
+}
+
+struct Location: Decodable {
+    let name: String?
 }
 
 struct User: Decodable {

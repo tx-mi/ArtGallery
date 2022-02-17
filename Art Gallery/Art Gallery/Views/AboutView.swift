@@ -40,15 +40,17 @@ class AboutView: UIView {
         aboutLabel.textColor = .white
         aboutLabel.font = UIFont.systemFont(ofSize: 13, weight: .heavy)
         aboutLabel.translatesAutoresizingMaskIntoConstraints = false
+        let date = convertDate(inputDate: photo.created_at)
+        
         aboutLabel.text =  """
             
             Author: \(photo.user.name)
             
-            Date: \(photo.width)
+            Date: \(date)
             
-            Place: \(photo.height)
+            Place: \(photo.location?.name ?? "None")
             
-            Downloads: \(photo.likes)
+            Downloads: \(photo.downloads)
             
             """
         self.addSubview(aboutLabel)
@@ -74,4 +76,23 @@ class AboutView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+// MAKR: - Date
+
+extension AboutView {
+    
+    private func convertDate(inputDate: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        
+        if  let dateLong = dateFormatter.date(from: inputDate) {
+            let displayFormatter = DateFormatter()
+            displayFormatter.dateStyle = .medium
+            return displayFormatter.string(from: dateLong)
+        }
+        
+        return ""
+    }
+    
 }

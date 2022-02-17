@@ -28,8 +28,7 @@ class NetworkService {
     private func prepareParameters(searchTerm: String?) -> [String: String] {
         var params = [String: String]()
         params["query"] = searchTerm
-        params["page"] = String(1)
-        params["per_page"] = String(50)
+        params["count"] = String(30)
         return params
     }
     
@@ -37,7 +36,7 @@ class NetworkService {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "api.unsplash.com"
-        components.path = "/search/photos"
+        components.path = "/photos/random"
         components.queryItems = params.map { URLQueryItem(name: $0, value: $1) }
         return components.url!
     }

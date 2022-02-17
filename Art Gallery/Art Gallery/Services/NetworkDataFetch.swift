@@ -10,14 +10,14 @@ class NetworkDataFetch {
     
     var networkService = NetworkService()
     
-    func fetchImages(searchTerm: String, completion: @escaping (SearchResults?) -> ()) {
+    func fetchImages(searchTerm: String, completion: @escaping ([UnsplashPhoto]?) -> ()) {
         networkService.request(searchTerm: searchTerm) { data, error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
                 completion(nil)
             }
             
-            let objects = self.decodeJSON(T: SearchResults.self, from: data)
+            let objects = self.decodeJSON(T: [UnsplashPhoto].self, from: data)
             completion(objects)
         }
     }

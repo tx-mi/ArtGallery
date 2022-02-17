@@ -30,7 +30,7 @@ class PhotosCollectionViewController: UICollectionViewController {
         // StartPage
         self.networkDataFetcher.fetchImages(searchTerm: "Hello") { [weak self] (searchResults) in
             guard let fetchedPhotos = searchResults else { return }
-            self?.photos = fetchedPhotos.results
+            self?.photos = fetchedPhotos
             self?.collectionView.reloadData()
             
             
@@ -95,7 +95,7 @@ extension PhotosCollectionViewController: UISearchBarDelegate {
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
             self.networkDataFetcher.fetchImages(searchTerm: searchText) { [weak self] (searchResults) in
                 guard let fetchedPhotos = searchResults else { return }
-                self?.photos = fetchedPhotos.results
+                self?.photos = fetchedPhotos
                 self?.collectionView.reloadData()
             }
         })
