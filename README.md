@@ -9,5 +9,5 @@ https://user-images.githubusercontent.com/73145960/154577291-e68f41ba-18de-4c40-
 
 ## Usage
 - git clone https://github.com/tx-mi/ArtGallery.git
-- Go to /Users/txmi/Art/Art Gallery/Art Gallery/Services/NetworkServies.swift
+- Go to Art Gallery/Art Gallery/Services/NetworkServies.swift
 - Change "/(keys.accessKey)" to your own accesKey
