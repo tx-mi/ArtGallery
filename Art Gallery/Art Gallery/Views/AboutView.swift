@@ -11,12 +11,11 @@ class AboutView: UIView {
     
     private var photo: UnsplashPhoto!
     
-    let starImageView: UIImageView = {
-        let image = UIImage(systemName: "star")
-        let imageView = UIImageView()
-        imageView.image = image
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
+    let heartButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "heart"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     init(photo: UnsplashPhoto) {
@@ -26,12 +25,15 @@ class AboutView: UIView {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = .black
         self.alpha = 0.8
+        
         setupAboutView()
+        setupHeartButton()
     }
     
     // MARK: - Setup Views
+    
     private func setupAboutView() {
-
+        
         let aboutLabel = UILabel()
         aboutLabel.lineBreakMode = .byTruncatingTail
         aboutLabel.numberOfLines = 9
@@ -57,15 +59,14 @@ class AboutView: UIView {
             aboutLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8)
         ])
         
-        setupStarImageView()
     }
     
-    private func setupStarImageView() {
-        self.addSubview(starImageView)
+    private func setupHeartButton() {
+        self.addSubview(heartButton)
         
         NSLayoutConstraint.activate([
-            starImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-            starImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            heartButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
+            heartButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
         ])
         
     }

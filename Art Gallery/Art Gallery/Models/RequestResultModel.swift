@@ -13,6 +13,7 @@ struct SearchResults: Decodable {
 }
 
 struct UnsplashPhoto: Decodable {
+    let id: String
     let width: Int
     let height: Int
     let likes: Int

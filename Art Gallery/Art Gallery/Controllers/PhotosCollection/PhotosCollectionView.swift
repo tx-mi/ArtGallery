@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SDWebImage
 
 class PhotosCollectionViewController: UICollectionViewController {
     
@@ -33,6 +32,8 @@ class PhotosCollectionViewController: UICollectionViewController {
             guard let fetchedPhotos = searchResults else { return }
             self?.photos = fetchedPhotos.results
             self?.collectionView.reloadData()
+            
+            
         }
         
     }
@@ -40,7 +41,6 @@ class PhotosCollectionViewController: UICollectionViewController {
     // MARK: - Setup UI elements
     
     private func setupCollectionCells() {
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CellID")
         collectionView.register(PhotoCollectionCell.self, forCellWithReuseIdentifier: PhotoCollectionCell.reuseId)
         
         collectionView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -74,8 +74,11 @@ class PhotosCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let photo = photos[indexPath.item]
-        present(DetailViewController(photo: photo), animated: true)
-//        navigationController?.pushViewController(DetailViewController(photo: photo), animated: true)
+        let tabbar = navigationController?.tabBarController as! MainTabBarController
+        let navVC = tabbar.viewControllers?[1] as! UINavigationController
+        let likesVC = navVC.topViewController as! FavouritesTableViewController
+ 
+        present(DetailViewController(photo: photo, likesViewController: likesVC), animated: true)
     }
     
     

@@ -12,6 +12,8 @@ class DetailViewController: UIViewController {
     
     var unsplashPhoto: UnsplashPhoto!
     
+    var likesVC: FavouritesTableViewController!
+    
     private let photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
@@ -22,12 +24,13 @@ class DetailViewController: UIViewController {
     
     private var aboutView: AboutView!
     
-    init(photo: UnsplashPhoto?) {
+    init(photo: UnsplashPhoto?, likesViewController: FavouritesTableViewController) {
         super.init(nibName: nil, bundle: nil)
         
         guard let coolPhoto = photo else { return }
         self.unsplashPhoto = coolPhoto
         self.aboutView = AboutView(photo: coolPhoto)
+        self.likesVC = likesViewController
     }
     
     override func viewDidLoad() {
@@ -40,6 +43,7 @@ class DetailViewController: UIViewController {
         
         setupPhotoImageView()
         setupAboutView()
+        updateHeartButtonState()
     }
     
     // MARK: - Setup Views
@@ -71,6 +75,33 @@ class DetailViewController: UIViewController {
             aboutView.trailingAnchor.constraint(equalTo: photoImageView.trailingAnchor)
         ])
         
+        aboutView.heartButton.addTarget(self, action: #selector(didTapOnHeart), for: .touchUpInside)
+    }
+    
+    @objc private func didTapOnHeart(sender: UIButton) {
+        
+        guard sender == aboutView.heartButton else { return }
+        if sender.image(for: .normal) == UIImage(systemName: "heart") {
+            likesVC.photos.append(unsplashPhoto)
+            likesVC.tableView.reloadData()
+        } else {
+            let alertController = UIAlertController(title: "You have already liked this photo!",
+                                                    message: "Want to remove from favourites?",
+                                                    preferredStyle: .alert)
+            let deleteAction = UIAlertAction(title: "Remove", style: .default) { (_) in
+                let countPhotos = self.likesVC.photos.count
+                if countPhotos == 0 { return }
+                self.likesVC.photos.remove(at: 0)
+                self.updateHeartButtonState()
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            alertController.addAction(deleteAction)
+            alertController.addAction(cancelAction)
+            present(alertController, animated: true)
+        }
+        updateHeartButtonState()
     }
     
     required init?(coder: NSCoder) {
@@ -80,3 +111,24 @@ class DetailViewController: UIViewController {
     
 }
 
+// MARK: - Search in favourites
+extension DetailViewController {
+    
+    func hasInLikes() -> Bool {
+        for picture in likesVC.photos {
+            if picture.id == unsplashPhoto.id {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func updateHeartButtonState() {
+        if !hasInLikes() {
+            aboutView.heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        } else {
+            aboutView.heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
+    }
+    
+}
