@@ -72,6 +72,12 @@ class PhotosCollectionViewController: UICollectionViewController {
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let photo = photos[indexPath.item]
+        present(DetailViewController(photo: photo), animated: true)
+//        navigationController?.pushViewController(DetailViewController(photo: photo), animated: true)
+    }
+    
     
 }
 
