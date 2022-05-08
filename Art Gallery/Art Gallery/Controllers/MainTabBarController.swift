@@ -17,8 +17,12 @@ class MainTabBarController: UITabBarController {
         let favouritesVC = FavouritesTableViewController()
         
         viewControllers = [
-            createNavigationController(rootViewController: photosVC, title: "Photos", image: UIImage(named: "photos")),
-            createNavigationController(rootViewController: favouritesVC, title: "Favourites", image: UIImage(named: "heart"))
+            createNavigationController(rootViewController: photosVC,
+                                       title: "Photos",
+                                       image: UIImage(named: "photos")),
+            createNavigationController(rootViewController: favouritesVC,
+                                       title: "Favourites",
+                                       image: UIImage(named: "heart"))
         ]
     }
     
