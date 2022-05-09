@@ -18,7 +18,7 @@ class MainTabBarController: UITabBarController {
         
         viewControllers = [
             createNavigationController(rootViewController: photosVC,
-                                       title: "Photos",
+                                       title: "Gallery",
                                        image: UIImage(named: "photos")),
             createNavigationController(rootViewController: favouritesVC,
                                        title: "Favourites",
@@ -28,6 +28,7 @@ class MainTabBarController: UITabBarController {
     
     private func createNavigationController(rootViewController: UIViewController, title: String, image: UIImage?) -> UIViewController {
         let navigationVC = UINavigationController(rootViewController: rootViewController)
+        rootViewController.title = title
         navigationVC.tabBarItem.title = title
         navigationVC.tabBarItem.image = image
         navigationVC.navigationBar.backgroundColor = .black

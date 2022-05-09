@@ -44,13 +44,16 @@ class FavouritesTableViewCell: UITableViewCell {
         setupNameLabel()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
      override func prepareForReuse() {
         super.prepareForReuse()
         photoImageView.image = nil
     }
     
     // MARK: - SetupViews
-    
     private func setupPhotoImageView() {
         self.addSubview(photoImageView)
         self.layer.cornerRadius = 5.0
@@ -75,7 +78,5 @@ class FavouritesTableViewCell: UITableViewCell {
         ])
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+
 }

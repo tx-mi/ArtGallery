@@ -17,12 +17,11 @@ class PhotosCollectionViewController: UICollectionViewController {
     
     private var timer: Timer?
     
-    private var photos = [UnsplashPhoto]()
+    private var displayedPhotos = [UnsplashPhoto]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Gallery"
         collectionView.backgroundColor = .black
         setupCollectionCells()
         setupSearchBar()
@@ -30,16 +29,13 @@ class PhotosCollectionViewController: UICollectionViewController {
         // StartPage
         self.networkDataFetcher.fetchImages(searchTerm: "Hello") { [weak self] (searchResults) in
             guard let fetchedPhotos = searchResults else { return }
-            self?.photos = fetchedPhotos
+            self?.displayedPhotos = fetchedPhotos
             self?.collectionView.reloadData()
-            
-            
         }
         
     }
     
     // MARK: - Setup UI elements
-    
     private func setupCollectionCells() {
         collectionView.register(PhotoCollectionCell.self, forCellWithReuseIdentifier: PhotoCollectionCell.reuseId)
         
@@ -60,25 +56,20 @@ class PhotosCollectionViewController: UICollectionViewController {
     }
     
     // MARK: - UICollectionViewDataSource UICollectionViewDelegate
-    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count
+        return displayedPhotos.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionCell.reuseId, for: indexPath) as! PhotoCollectionCell
         cell.backgroundColor = .lightGray
-        cell.unsplashPhoto = photos[indexPath.item]
+        cell.unsplashPhoto = displayedPhotos[indexPath.item]
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let photo = photos[indexPath.item]
-        let tabbar = navigationController?.tabBarController as! MainTabBarController
-        let navVC = tabbar.viewControllers?[1] as! UINavigationController
-        let likesVC = navVC.topViewController as! FavouritesTableViewController
- 
-        present(DetailViewController(photo: photo, likesViewController: likesVC), animated: true)
+        let photo = displayedPhotos[indexPath.item]
+        present(DetailViewController(photo: photo), animated: true)
     }
     
     
@@ -86,7 +77,6 @@ class PhotosCollectionViewController: UICollectionViewController {
 
 
 // MARK: - UISearchBarDelegate
-
 extension PhotosCollectionViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -95,7 +85,7 @@ extension PhotosCollectionViewController: UISearchBarDelegate {
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
             self.networkDataFetcher.fetchImages(searchTerm: searchText) { [weak self] (searchResults) in
                 guard let fetchedPhotos = searchResults else { return }
-                self?.photos = fetchedPhotos
+                self?.displayedPhotos = fetchedPhotos
                 self?.collectionView.reloadData()
             }
         })
@@ -108,7 +98,7 @@ extension PhotosCollectionViewController: UISearchBarDelegate {
 extension PhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let photo = photos[indexPath.item]
+        let photo = displayedPhotos[indexPath.item]
         let paddingSpace = sectionInsets.left * (elementsPerRow + 1)
         let availableWidth = view.frame.width - paddingSpace
         let itemWidth = availableWidth / elementsPerRow
