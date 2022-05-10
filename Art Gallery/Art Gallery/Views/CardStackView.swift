@@ -11,6 +11,18 @@ import UIKit
 class CardStackView: UIStackView {
     private var photo: UnsplashPhoto!
     
+    private let heartButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+        button.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+        button.layer.cornerRadius = button.bounds.size.width / 2 + 5
+        button.clipsToBounds = true
+        button.setImage(UIImage(named: "heart64.fill"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
@@ -69,6 +81,14 @@ class CardStackView: UIStackView {
         let photoUrl = photo.urls["regular"]
         guard let imageURL = photoUrl, let url = URL(string: imageURL) else { return }
         imageView.sd_setImage(with: url, completed: nil)
+        
+        imageView.addSubview(heartButton)
+        NSLayoutConstraint.activate([
+            heartButton.widthAnchor.constraint(equalToConstant: 42),
+            heartButton.heightAnchor.constraint(equalToConstant: 42),
+            heartButton.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -10),
+            heartButton.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -10)
+        ])
     }
     
     func setupDescription() {
