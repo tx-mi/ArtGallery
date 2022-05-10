@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A999FBD94A2ECC6A9F6BA1CB /* Pods_Art_Gallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C525F6529B88CD34CB16051B /* Pods_Art_Gallery.framework */; };
 		C53AB11027BC8D8A00F45F98 /* PhotosCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53AB10F27BC8D8A00F45F98 /* PhotosCollectionView.swift */; };
+		C543A4FD282AB89700330B5F /* LikedPhotos+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543A4FB282AB89700330B5F /* LikedPhotos+CoreDataClass.swift */; };
+		C543A4FE282AB89700330B5F /* LikedPhotos+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543A4FC282AB89700330B5F /* LikedPhotos+CoreDataProperties.swift */; };
 		C549BDB527BD576600FEDD90 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C549BDB427BD576600FEDD90 /* MainTabBarController.swift */; };
 		C559825328295E91000DD791 /* CardStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C559825228295E91000DD791 /* CardStackView.swift */; };
 		C559825528298611000DD791 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C559825428298611000DD791 /* DetailViewController.swift */; };
@@ -22,6 +24,7 @@
 		C5CA9BD027BC514000AA5E69 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA9BCF27BC514000AA5E69 /* SceneDelegate.swift */; };
 		C5CA9BD727BC514100AA5E69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5CA9BD627BC514100AA5E69 /* Assets.xcassets */; };
 		C5E3D97227BD5C1700D90F61 /* PhotoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E3D97127BD5C1700D90F61 /* PhotoCollectionCell.swift */; };
+		C5E41C19282A968100D9B636 /* FavouritesPhotos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C5E41C17282A968100D9B636 /* FavouritesPhotos.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,8 @@
 		BF420DA42A42EF4FA4948FBC /* Pods-Art Gallery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Art Gallery.release.xcconfig"; path = "Target Support Files/Pods-Art Gallery/Pods-Art Gallery.release.xcconfig"; sourceTree = "<group>"; };
 		C525F6529B88CD34CB16051B /* Pods_Art_Gallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Art_Gallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C53AB10F27BC8D8A00F45F98 /* PhotosCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionView.swift; sourceTree = "<group>"; };
+		C543A4FB282AB89700330B5F /* LikedPhotos+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LikedPhotos+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C543A4FC282AB89700330B5F /* LikedPhotos+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LikedPhotos+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C549BDB427BD576600FEDD90 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		C559825228295E91000DD791 /* CardStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackView.swift; sourceTree = "<group>"; };
 		C559825428298611000DD791 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -45,6 +50,7 @@
 		C5CA9BD927BC514100AA5E69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C5CA9BDB27BC514100AA5E69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5E3D97127BD5C1700D90F61 /* PhotoCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionCell.swift; sourceTree = "<group>"; };
+		C5E41C18282A968100D9B636 /* FavouritesPhotos.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavouritesPhotos.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +71,15 @@
 				C525F6529B88CD34CB16051B /* Pods_Art_Gallery.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C543A4FF282AB89F00330B5F /* LikedPhotoItem */ = {
+			isa = PBXGroup;
+			children = (
+				C543A4FB282AB89700330B5F /* LikedPhotos+CoreDataClass.swift */,
+				C543A4FC282AB89700330B5F /* LikedPhotos+CoreDataProperties.swift */,
+			);
+			path = LikedPhotoItem;
 			sourceTree = "<group>";
 		};
 		C5CA9BC127BC514000AA5E69 = {
@@ -88,6 +103,7 @@
 		C5CA9BCC27BC514000AA5E69 /* Art Gallery */ = {
 			isa = PBXGroup;
 			children = (
+				C543A4FF282AB89F00330B5F /* LikedPhotoItem */,
 				C5CA9BE427BC57FF00AA5E69 /* Services */,
 				C5CA9BE327BC57F600AA5E69 /* Controllers */,
 				C5CA9BE227BC57DD00AA5E69 /* Views */,
@@ -96,6 +112,7 @@
 				C5CA9BCD27BC514000AA5E69 /* AppDelegate.swift */,
 				C5CA9BCF27BC514000AA5E69 /* SceneDelegate.swift */,
 				C5CA9BDB27BC514100AA5E69 /* Info.plist */,
+				C5E41C17282A968100D9B636 /* FavouritesPhotos.xcdatamodeld */,
 			);
 			path = "Art Gallery";
 			sourceTree = "<group>";
@@ -286,6 +303,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C543A4FE282AB89700330B5F /* LikedPhotos+CoreDataProperties.swift in Sources */,
+				C5E41C19282A968100D9B636 /* FavouritesPhotos.xcdatamodeld in Sources */,
 				C559825528298611000DD791 /* DetailViewController.swift in Sources */,
 				C59AFBB127BC94B100B02563 /* NetworkServices.swift in Sources */,
 				C549BDB527BD576600FEDD90 /* MainTabBarController.swift in Sources */,
@@ -298,6 +317,7 @@
 				C573F73F27BCABC700040B7F /* Keys.swift in Sources */,
 				C559825328295E91000DD791 /* CardStackView.swift in Sources */,
 				C5CA9BD027BC514000AA5E69 /* SceneDelegate.swift in Sources */,
+				C543A4FD282AB89700330B5F /* LikedPhotos+CoreDataClass.swift in Sources */,
 				C57C05AE27BE69D300B89A5E /* FavouritesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -512,6 +532,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C5E41C17282A968100D9B636 /* FavouritesPhotos.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C5E41C18282A968100D9B636 /* FavouritesPhotos.xcdatamodel */,
+			);
+			currentVersion = C5E41C18282A968100D9B636 /* FavouritesPhotos.xcdatamodel */;
+			path = FavouritesPhotos.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C5CA9BC227BC514000AA5E69 /* Project object */;
 }

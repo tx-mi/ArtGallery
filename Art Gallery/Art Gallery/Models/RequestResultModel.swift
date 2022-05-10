@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UnsplashPhoto: Decodable {
+struct UnsplashPhoto: Codable {
     let id: String
     let created_at: String
     let width: Int
@@ -27,11 +27,11 @@ struct UnsplashPhoto: Decodable {
     }
 }
 
-struct Location: Decodable {
+struct Location: Codable {
     let name: String?
 }
 
-struct User: Decodable {
+struct User: Codable {
     let id: String
     let username: String
     let name: String

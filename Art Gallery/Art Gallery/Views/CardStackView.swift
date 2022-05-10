@@ -11,13 +11,13 @@ import UIKit
 class CardStackView: UIStackView {
     private var photo: UnsplashPhoto!
     
-    private let heartButton: UIButton = {
+    let heartButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
         button.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
         button.layer.cornerRadius = button.bounds.size.width / 2 + 5
         button.clipsToBounds = true
-        button.setImage(UIImage(named: "heart64.fill"), for: .normal)
+        button.setImage(UIImage(named: "heart64"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -27,6 +27,7 @@ class CardStackView: UIStackView {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
         imageView.contentMode = .scaleAspectFill
+        imageView.isUserInteractionEnabled = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()

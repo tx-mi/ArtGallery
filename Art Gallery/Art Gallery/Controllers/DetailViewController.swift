@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DetailViewController: UIViewController {
     
@@ -26,6 +27,7 @@ class DetailViewController: UIViewController {
         guard let coolPhoto = photo else { return }
         self.photo = coolPhoto
         cardStackView = CardStackView(photo: coolPhoto)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -45,6 +47,7 @@ class DetailViewController: UIViewController {
         setupCardView()
     }
     
+    // MARK: - Setup Views
     func setupScrollView() {
         view.addSubview(scrollView)
         
@@ -71,6 +74,77 @@ class DetailViewController: UIViewController {
             cardStackView.heightAnchor.constraint(equalToConstant: height)
         ])
         
+        updateStateOfHeartButton()
+        cardStackView.heartButton.addTarget(self, action: #selector(didTapOnHeart(_:)), for: .touchUpInside)
+    }
+    
+    func searchItem(photos: [LikedPhotos]) -> LikedPhotos? {
+        for item in photos {
+            if item.id == photo.id {
+                return item
+            }
+        }
+        return nil
+    }
+}
+
+// MARK: - Setup Button
+extension DetailViewController {
+    
+    func updateStateOfHeartButton() {
+        if searchItem(photos: LikedPhotos().getAllItems()) != nil {
+            cardStackView.heartButton.setImage(UIImage(named: "heart64.red.fill"), for: .normal)
+        }
+    }
+    
+    @objc func didTapOnHeart(_ sender: UIButton) {
+        if sender.image(for: .normal) == UIImage(named: "heart64") {
+            sender.setImage(UIImage(named: "heart64.red.fill"), for: .normal)
+            createItem(id: photo.id)
+        } else {
+            sender.setImage(UIImage(named: "heart64"), for: .normal)
+            deleteItem(item: searchItem(photos: LikedPhotos().getAllItems())!)
+        }
+        
+        NotificationCenter.default.post(name: NSNotification.Name("updateLikedPhotos"),
+                                        object: LikedPhotos().getAllItems())
+    }
+}
+
+// MARK: - Core Data
+extension DetailViewController {
+    
+
+    
+    func createItem(id: String) {
+        guard let managedContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else {
+            return
+        }
+        
+        let newItem = LikedPhotos(context: managedContext)
+        newItem.id = id
+        newItem.unsplashPhoto = newItem.convertToData(photo: photo)
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save item. \(error) \(error.userInfo)")
+        }
+        
+    }
+    
+    func deleteItem(item: LikedPhotos) {
+        guard let managedContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else {
+            return
+        }
+        
+        managedContext.delete(item)
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save item. \(error) \(error.userInfo)")
+        }
     }
     
 }
